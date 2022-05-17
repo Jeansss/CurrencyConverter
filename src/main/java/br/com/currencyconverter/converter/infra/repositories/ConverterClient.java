@@ -1,7 +1,6 @@
-package br.com.currencyconverter.converter.controllers;
+package br.com.currencyconverter.converter.infra.repositories;
 
-import br.com.currencyconverter.converter.entities.Converter;
-import java.util.Map;
+import br.com.currencyconverter.converter.infra.http.model.CurrencyInformation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ConverterClient {
 
   @GetMapping("/{currencies}")
-  public Map<String, Map<String, String>> getCurrencyQuote(@PathVariable String currencies);
+  CurrencyInformation getCurrencyQuote(@PathVariable String currencies);
 
 }

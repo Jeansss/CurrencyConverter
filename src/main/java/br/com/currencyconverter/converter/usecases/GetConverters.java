@@ -2,10 +2,11 @@ package br.com.currencyconverter.converter.usecases;
 
 
 import br.com.currencyconverter.converter.entities.Converter;
-import br.com.currencyconverter.converter.repositories.ConverterRepository;
-import java.util.List;
+import br.com.currencyconverter.converter.infra.http.ConverterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor

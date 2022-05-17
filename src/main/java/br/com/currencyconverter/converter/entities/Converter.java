@@ -39,4 +39,8 @@ public class Converter {
   public void setConvertedValue(BigDecimal currencyQuote) {
     this.convertedValue = this.valueNotConverted.multiply(currencyQuote).setScale(2 ,RoundingMode.HALF_UP);
   }
+
+  public String getConversionKey() {
+    return getOriginOfCurrency() + "-" + getCurrencyDestination();
+  }
 }
