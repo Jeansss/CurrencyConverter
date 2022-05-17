@@ -14,7 +14,7 @@ public class GetConverters {
   private final ConverterRepository converterRepository;
 
   public List<Converter> execute() {
-    return converterRepository.findAll();
+    return converterRepository.findByCurrencyDestination("USD");
   }
 
 }

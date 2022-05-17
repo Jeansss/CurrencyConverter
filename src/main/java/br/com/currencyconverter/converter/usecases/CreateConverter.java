@@ -18,8 +18,6 @@ public class CreateConverter {
   public Converter execute(Converter converter) {
     Map<String, Map<String, String>> currencyInformation = converterClient.getCurrencyQuote(converter.getOriginOfCurrency() + "-" + converter.getCurrencyDestination());
     converter.setConvertedValue(new BigDecimal(currencyInformation.get(converter.getOriginOfCurrency() + converter.getCurrencyDestination()).get("bid")));
-
-
-    return converterRepository.create(converter);
+    return converterRepository.save(converter);
   }
 }
