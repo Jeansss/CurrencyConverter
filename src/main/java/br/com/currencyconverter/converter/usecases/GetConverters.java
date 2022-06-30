@@ -2,7 +2,7 @@ package br.com.currencyconverter.converter.usecases;
 
 
 import br.com.currencyconverter.converter.entities.Conversion;
-import br.com.currencyconverter.converter.infra.db.ConverterRepository;
+import br.com.currencyconverter.converter.infra.db.repositories.ConverterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

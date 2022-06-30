@@ -1,4 +1,4 @@
-package br.com.currencyconverter.converter.infra.db;
+package br.com.currencyconverter.converter.infra.db.repositories;
 
 import br.com.currencyconverter.converter.entities.Conversion;
 import org.springframework.data.jpa.repository.JpaRepository;
