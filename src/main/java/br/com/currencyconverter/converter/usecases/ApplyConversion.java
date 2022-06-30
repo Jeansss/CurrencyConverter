@@ -1,10 +1,10 @@
 package br.com.currencyconverter.converter.usecases;
 
-import br.com.currencyconverter.converter.entities.Converter;
+import br.com.currencyconverter.converter.entities.Conversion;
 import br.com.currencyconverter.converter.events.ConversionAppliedEvent;
-import br.com.currencyconverter.converter.infra.http.ConverterRepository;
-import br.com.currencyconverter.converter.infra.http.model.CurrencyInformation;
-import br.com.currencyconverter.converter.infra.repositories.ConverterClient;
+import br.com.currencyconverter.converter.infra.http.clients.IpClient;
+import br.com.currencyconverter.converter.infra.http.clients.dto.CurrencyBid;
+import br.com.currencyconverter.converter.infra.http.clients.ConverterClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
@@ -13,12 +13,16 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ApplyConversion {
 
+  private final IpClient ipService;
   private final ConverterClient converterClient;
   private final ApplicationEventPublisher publisher;
+  public Conversion execute(Conversion conversion) {
+    CurrencyBid currencyBid = converterClient.getCurrencyQuote(conversion.getConversionParam());
 
-  public CurrencyInformation execute(Converter converter) {
-    CurrencyInformation currencyInformation = converterClient.getCurrencyQuote(converter.getConversionKey());
-    publisher.publishEvent(new ConversionAppliedEvent(converter, currencyInformation));
-    return currencyInformation;
+    conversion.setIp(ipService.getIp());
+    conversion.setConvertedValue(currencyBid.getBidByKey(conversion.getConversionKey()));
+
+    publisher.publishEvent(new ConversionAppliedEvent(conversion));
+    return conversion;
   }
 }

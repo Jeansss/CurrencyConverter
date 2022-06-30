@@ -8,18 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
+@ToString
 @Entity
 @Getter
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Table(name = "conversions")
-public class Converter {
+public class Conversion {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +40,15 @@ public class Converter {
     this.convertedValue = this.valueNotConverted.multiply(currencyQuote).setScale(2 ,RoundingMode.HALF_UP);
   }
 
-  public String getConversionKey() {
+  public String getConversionParam() {
     return getOriginOfCurrency() + "-" + getCurrencyDestination();
+  }
+
+  public String getConversionKey() {
+    return getOriginOfCurrency() + getCurrencyDestination();
+  }
+
+  public void setIp(String ip) {
+    this.ip = ip;
   }
 }
